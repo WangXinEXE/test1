@@ -18,34 +18,63 @@ import java.util.Set;
  */
 public class LongestCommonPrefix {
     public static void main(String[] args) {
-        String[] strs = {"flswer", "flow", "flight"};
-        new LongestCommonPrefix().longestCommonPrefix(strs);
+        String[] strs = {"a","ac"};
+        String[] strs1 = {"flower","flow","flight"};
+        String s = new LongestCommonPrefix().longestCommonPrefix(strs1);
+        System.out.println(s);
+
+
     }
 
     public String longestCommonPrefix(String[] strs) {
         HashSet<String> set = new HashSet<>();
         int index = 1;
-        for (String str : strs) {
-            set.add(str.substring(0, index));
+        String res = "";
+        if(strs.length == 1) {
+            return strs[0];
+        }
+        for (String s : strs) {
+            set.add(s);
+        }
+        if(set.size() == 1) {
+            for (String s : set) {
+                res = s;
+            }
+            return res;
+        } else {
+            set.clear();
+        }
+        try {
+            for (String str : strs) {
+                set.add(str.substring(0, index));
+            }
+        } catch (Exception e) {
+            return "";
         }
         if(set.size() != 1) {
             return "";
         }
         while (true) {
             index++;
-            set.clear();
-            for (String str : strs) {
-                set.add(str.substring(0, index));
+            //set.clear();
+            try {
+                for (String str : strs) {
+                    set.add(str.substring(0, index));
+                }
+            } catch (Exception e) {
+                for (String s : set) {
+                    res = s.substring(0, s.length());
+                }
+                return res;
             }
             if(set.size() != 1) {
                 break;
             }
         }
-        Iterator<String> iterator = set.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
+        for (String s : set) {
+             res = s.substring(0, s.length() - 1);
         }
-        return null;
+        return res;
     }
 
 
