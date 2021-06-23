@@ -22,11 +22,9 @@ public class LongestCommonPrefix {
         String[] strs1 = {"flower","flow","flight"};
         String s = new LongestCommonPrefix().longestCommonPrefix(strs1);
         System.out.println(s);
-
-
     }
 
-    public String longestCommonPrefix(String[] strs) {
+    public String longestCommonPrefix(String[] strs) {//多捞啊
         HashSet<String> set = new HashSet<>();
         int index = 1;
         String res = "";
@@ -75,6 +73,22 @@ public class LongestCommonPrefix {
              res = s.substring(0, s.length() - 1);
         }
         return res;
+    }
+
+    public String newLngestCommonPrefix(String[] strs) {
+        if(strs.length == 0) {
+            return "";
+        }
+        if(strs.length == 1) {
+            return strs[0];
+        }
+        String s = strs[0];
+        for (String str : strs) {
+            while (!str.startsWith(s)) {
+                s = s.substring(0,s.length() - 1);
+            }
+        }
+        return s;
     }
 
 
