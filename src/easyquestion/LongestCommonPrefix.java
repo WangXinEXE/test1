@@ -2,6 +2,7 @@ package easyquestion;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -17,21 +18,34 @@ import java.util.Set;
  */
 public class LongestCommonPrefix {
     public static void main(String[] args) {
-       String[] strs = {"flower","flow","flight"};
-        HashSet<String> set = new HashSet<>();
-        for (String str : strs) {
-            set.add(str.substring(0,1));
-        }
-        if(set.size() == 1) {
-            for (String s : set) {
-                System.out.println(s);
-            }
-        }
+        String[] strs = {"flswer", "flow", "flight"};
+        new LongestCommonPrefix().longestCommonPrefix(strs);
     }
 
     public String longestCommonPrefix(String[] strs) {
+        HashSet<String> set = new HashSet<>();
+        int index = 1;
+        for (String str : strs) {
+            set.add(str.substring(0, index));
+        }
+        if(set.size() != 1) {
+            return "";
+        }
+        while (true) {
+            index++;
+            set.clear();
+            for (String str : strs) {
+                set.add(str.substring(0, index));
+            }
+            if(set.size() != 1) {
+                break;
+            }
+        }
+        Iterator<String> iterator = set.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
         return null;
-
     }
 
 
