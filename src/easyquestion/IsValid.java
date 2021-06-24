@@ -1,5 +1,8 @@
 package easyquestion;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 /**
  * 给定一个只包括 '('，')'，'{'，'}'，'['，']的字符串 s ，判断字符串是否有效。
  * 有效字符串需满足：
@@ -21,21 +24,34 @@ package easyquestion;
 public class IsValid {
     public static void main(String[] args) {
         String s = "()[]{}";
-        String s1 = "()[]{";
+        String s1 = "()[{";
         String s2 = "{[]}";
         String s3 = "(){[]}";
-        CharSequence charSequence = s.subSequence(0, 2);
-        System.out.println(charSequence);
+//        ArrayList<String> list = new ArrayList<>();
+//        for (int i = 0; i < s.length(); i += 2) {
+//            String s4 = s.substring(i, i + 2);
+//            list.add(s4);
+//        }
+        boolean valid = new IsValid().isValid(s1);
+        System.out.println(valid);
+
 
     }
-    public boolean isValid(String s) {
-        if(s.length() % 2 != 0) {
-            return false;
+
+    public boolean isValid(String s) {  //利用栈的先进后出结构进行判断,很巧妙
+        Stack<Character> stack = new Stack<>();
+        for (char c : s.toCharArray()) {
+            if(c == '(') {
+                stack.push(')');
+            } else if(c == '{') {
+                stack.push('}');
+            } else if(c == '[') {
+                stack.push(']');
+            } else if(stack.isEmpty() || c != stack.pop() ) {
+                return false;
+            }
         }
-        return false;
-
-
-
+        return stack.isEmpty();
     }
 
 }
