@@ -25,7 +25,7 @@ public class IsValid {
     public static void main(String[] args) {
         String s = "()[]{}";
         String s1 = "()[{";
-        String s2 = "{[]}";
+        String s2 = "{[()]}";
         String s3 = "(){[]}";
 //        ArrayList<String> list = new ArrayList<>();
 //        for (int i = 0; i < s.length(); i += 2) {
@@ -33,9 +33,9 @@ public class IsValid {
 //            list.add(s4);
 //        }
         boolean valid = new IsValid().isValid(s1);
-        System.out.println(valid);
-
-
+        boolean b = new IsValid().newIsValid(s2);
+        System.out.println(b);
+        //System.out.println(valid);
     }
 
     public boolean isValid(String s) {  //利用栈的先进后出结构进行判断,很巧妙
@@ -52,6 +52,14 @@ public class IsValid {
             }
         }
         return stack.isEmpty();
+    }
+
+    public boolean newIsValid(String s) {  //替换方法
+        int length = s.length() / 2;
+        for (int i = 0; i < length; i++) {
+            s = s.replace("()", "").replace("{}", "").replace("[]", "");
+        }
+        return s.length() == 0;
     }
 
 }
